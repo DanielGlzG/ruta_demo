@@ -16,6 +16,13 @@ class ClientesNotifier extends StateNotifier<ClientesState> {
   ClientesNotifier({required this.repository}) : super(ClientesState()) {
     loadClientes();
   }
+
+  Future<void> syncClientes() async {
+    final clientes = await repository.syncClientes();
+
+    state = state.copyWith(clientes: clientes);
+  }
+
   Future<void> loadClientes() async {
     if (state.isLoading || state.isLastPage) return;
 
@@ -31,7 +38,7 @@ class ClientesNotifier extends StateNotifier<ClientesState> {
         state = state.copyWith(
           isLastPage: false,
           isLoading: false,
-          articulos: [...state.clientes, ...clientes],
+          clientes: [...state.clientes, ...clientes],
           page: state.page + 1,
         );
       }
@@ -63,7 +70,7 @@ class ClientesState {
     int? size,
     int? page,
     bool? isLoading,
-    List<Cliente>? articulos,
+    List<Cliente>? clientes,
     String? error,
   }) =>
       ClientesState(
@@ -71,7 +78,7 @@ class ClientesState {
         size: size ?? this.size,
         page: page ?? this.page,
         isLoading: isLoading ?? this.isLoading,
-        clientes: articulos ?? this.clientes,
+        clientes: clientes ?? this.clientes,
         error: error ?? this.error,
       );
 }

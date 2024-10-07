@@ -17,7 +17,7 @@ class SucursalesScreen extends ConsumerWidget {
             // const Conectiondisplay(),
             IconButton(
                 onPressed: () {
-                  ref.read(mixRepositoryProvider).syncSucursales();
+                  ref.read(sucursalesProvider.notifier).syncSucursales();
                 },
                 icon: const Icon(Icons.sync)),
             IconButton(

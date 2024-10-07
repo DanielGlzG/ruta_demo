@@ -1,6 +1,5 @@
 import 'package:ruta_demo/main/domain/entities/entities.dart';
 import 'package:ruta_demo/main/presentation/providers/almacenes_provider.dart';
-import 'package:ruta_demo/main/presentation/providers/repository_provider.dart';
 import 'package:ruta_demo/main/presentation/widgets/customDrawer.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -15,7 +14,7 @@ class AlmacenesScreen extends ConsumerWidget {
           actions: [
             IconButton(
                 onPressed: () {
-                  ref.read(mixRepositoryProvider).syncAlmacenes();
+                  ref.read(almacenesProvider.notifier).synchAlmacenes();
                 },
                 icon: const Icon(Icons.sync)),
             IconButton(

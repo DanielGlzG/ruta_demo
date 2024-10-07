@@ -8,10 +8,28 @@ class CobradoresScreen extends ConsumerWidget {
   const CobradoresScreen({super.key});
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    return const Scaffold(
-        appBar: CustomAppbar(),
-        body: _CobradoresView(),
-        drawer: CustomdDrawer());
+    return Scaffold(
+        appBar: AppBar(
+          title: const Text('Clientes'),
+          actions: [
+            IconButton(
+                onPressed: () {
+                  ref.read(cobradoresProvider.notifier).syncCobradores();
+                },
+                icon: const Icon(Icons.sync)),
+            IconButton(
+              icon: const Icon(Icons.search),
+              onPressed: () {
+                // showSearch(
+                //     context: context,
+                //     delegate: SearchArticuloDelegate(
+                //         initialArticulos: [], searchArticulo: searchArticulo));
+              },
+            ),
+          ],
+        ),
+        body: const _CobradoresView(),
+        drawer: const CustomdDrawer());
   }
 }
 

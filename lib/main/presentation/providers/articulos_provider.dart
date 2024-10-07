@@ -98,6 +98,12 @@ class ArticulosNotifier extends StateNotifier<ArticulosState> {
     }
   }
 
+  Future syncArticulos() async {
+    final articulos = await repository.syncArticulos();
+
+    state = state.copyWith(articulos: articulos);
+  }
+
   Future<List<Articulo>> searchArticulo(String term) async {
     try {
       final articulos = await repository.searchArticulosByTerm(term);

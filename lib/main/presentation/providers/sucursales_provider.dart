@@ -16,6 +16,12 @@ class SucursalesNotifier extends StateNotifier<SucursalesState> {
     loadSucursales();
   }
 
+  Future<void> syncSucursales() async {
+    final sucursales = await repository.syncSucursales();
+
+    state = state.copyWith(sucursales: sucursales);
+  }
+
   Future loadSucursales() async {
     final sucursales = await repository.getSucursales();
 

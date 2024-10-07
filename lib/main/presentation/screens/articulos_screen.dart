@@ -17,7 +17,7 @@ class ArticulosScreen extends ConsumerWidget {
           // const Conectiondisplay(),
           IconButton(
               onPressed: () {
-                ref.read(mixRepositoryProvider).syncArticulos();
+                ref.read(articulosProvider.notifier).syncArticulos();
               },
               icon: const Icon(Icons.sync)),
           IconButton(
@@ -51,31 +51,33 @@ class _ArticulosView extends ConsumerStatefulWidget {
 }
 
 class _ArticulosViewState extends ConsumerState<_ArticulosView> {
+  final scrollController = ScrollController();
   @override
   void initState() {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      // ref.read(articulosProvider.notifier).loadArticulos();
+      ref.read(articulosProvider.notifier).loadArticulos();
       // ref.read(articulosFireBaseProvider.notifier).loadArticulos();
     });
 
-    // scrollController.addListener(() {
-    //   if ((scrollController.position.pixels) >=
-    //       scrollController.position.maxScrollExtent) {
-    //     ref.read(articulosProvider.notifier).loadArticulos();
-    //   }
-    // });
+    scrollController.addListener(() {
+      if ((scrollController.position.pixels) >=
+          scrollController.position.maxScrollExtent) {
+        ref.read(articulosProvider.notifier).loadArticulos();
+      }
+    });
   }
 
   @override
   void dispose() {
+    scrollController.dispose();
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
-    final articulosState = ref.watch(articulosFireBaseProvider);
-    // final articulosState = ref.watch(articulosProvider);
+    // final articulosState = ref.watch(articulosFireBaseProvider);
+    final articulosState = ref.watch(articulosProvider);
 
     return articulosState.isLoading
         ? const CircularProgressIndicator()
@@ -88,8 +90,10 @@ class _ArticulosViewState extends ConsumerState<_ArticulosView> {
                     Text(
                         'Articulos cargados: ${articulosState.articulos.length}'),
                     Flexible(
-                        child:
-                            ArticulosList(articulos: articulosState.articulos)),
+                        child: ArticulosList(
+                      articulos: articulosState.articulos,
+                      scrollController: scrollController,
+                    )),
                   ],
                 ),
               );
@@ -98,8 +102,9 @@ class _ArticulosViewState extends ConsumerState<_ArticulosView> {
 
 class ArticulosList extends StatefulWidget {
   final List<Articulo> articulos;
-
-  const ArticulosList({super.key, required this.articulos});
+  final ScrollController scrollController;
+  const ArticulosList(
+      {super.key, required this.articulos, required this.scrollController});
 
   @override
   _ArticulosListState createState() => _ArticulosListState();
@@ -150,6 +155,7 @@ class _ArticulosListState extends State<ArticulosList> {
           ),
           Expanded(
             child: ListView.builder(
+              controller: widget.scrollController,
               itemCount: filteredArticulos.length,
               itemBuilder: (context, index) {
                 return Container(

@@ -15,7 +15,9 @@ class CondicionesPagoScreen extends ConsumerWidget {
           actions: [
             IconButton(
                 onPressed: () {
-                  ref.read(mixRepositoryProvider).syncCondicionesPago();
+                  ref
+                      .read(condicionesPagoProvider.notifier)
+                      .syncCondicionesPago();
                 },
                 icon: const Icon(Icons.sync)),
             IconButton(

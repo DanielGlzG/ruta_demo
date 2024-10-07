@@ -22,6 +22,11 @@ class AlmacenesNotifier extends StateNotifier<AlamacenesState> {
 
     state = state.copyWith(almacenes: almacenes);
   }
+
+  Future synchAlmacenes() async {
+    final almacenes = await repository.syncAlmacenes();
+    state = state.copyWith(almacenes: almacenes);
+  }
 }
 
 class AlamacenesState {

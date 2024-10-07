@@ -17,7 +17,7 @@ class MonedasScreen extends ConsumerWidget {
             // const Conectiondisplay(),
             IconButton(
                 onPressed: () {
-                  ref.read(mixRepositoryProvider).syncMonedas();
+                  ref.read(monedasProvider.notifier).syncMonedas();
                 },
                 icon: const Icon(Icons.sync)),
             IconButton(

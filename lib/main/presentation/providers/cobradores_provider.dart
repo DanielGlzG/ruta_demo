@@ -17,6 +17,12 @@ class CobradoresNotifier extends StateNotifier<CobradoresState> {
     loadCobradores();
   }
 
+  Future<void> syncCobradores() async {
+    final cobradores = await repository.syncCobradores();
+
+    state = state.copyWith(cobradores: cobradores);
+  }
+
   Future loadCobradores() async {
     final cobradores = await repository.getCobradores();
 

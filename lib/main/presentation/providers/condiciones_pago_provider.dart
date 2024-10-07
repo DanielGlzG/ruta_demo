@@ -18,6 +18,12 @@ class CondicionesPagoNotifier extends StateNotifier<CondicionesPagoState> {
     loadCondicionesPago();
   }
 
+  Future<void> syncCondicionesPago() async {
+    final condiciones = await repository.syncCondicionesPago();
+
+    state = state.copyWith(condicionesPago: condiciones);
+  }
+
   Future loadCondicionesPago() async {
     final condicionesPago = await repository.getCondicionesPago();
 

@@ -17,6 +17,12 @@ class MonedasNotifier extends StateNotifier<MonedasState> {
     loadMonedas();
   }
 
+  Future<void> syncMonedas() async {
+    final monedas = await repository.syncMonedas();
+
+    state = state.copyWith(monedas: monedas);
+  }
+
   Future loadMonedas() async {
     final monedas = await repository.getMonedas();
 

@@ -17,7 +17,7 @@ class VendedoresScreen extends ConsumerWidget {
             // const Conectiondisplay(),
             IconButton(
                 onPressed: () {
-                  ref.read(mixRepositoryProvider).syncVendedores();
+                  ref.read(vendedoresProvider.notifier).syncVendedores();
                 },
                 icon: const Icon(Icons.sync)),
             IconButton(

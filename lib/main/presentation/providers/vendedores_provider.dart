@@ -17,6 +17,12 @@ class VendedoresNotifier extends StateNotifier<VendedoresState> {
     loadVendedores();
   }
 
+  Future<void> syncVendedores() async {
+    final vendedores = await repository.syncVendedores();
+
+    state = state.copyWith(vendedores: vendedores);
+  }
+
   Future loadVendedores() async {
     final vendedores = await repository.getVendedores();
 

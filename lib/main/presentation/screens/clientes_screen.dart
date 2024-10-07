@@ -1,6 +1,5 @@
 import 'package:ruta_demo/main/domain/entities/entities.dart';
-import 'package:ruta_demo/main/presentation/providers/Clientes_provider.dart';
-import 'package:ruta_demo/main/presentation/providers/repository_provider.dart';
+import 'package:ruta_demo/main/presentation/providers/clientes_provider.dart';
 import 'package:ruta_demo/main/presentation/widgets/customDrawer.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -15,7 +14,7 @@ class ClientesScreen extends ConsumerWidget {
           actions: [
             IconButton(
                 onPressed: () {
-                  ref.read(mixRepositoryProvider).syncClientes();
+                  ref.read(clientesProvider.notifier).syncClientes();
                 },
                 icon: const Icon(Icons.sync)),
             IconButton(
