@@ -1,0 +1,12 @@
+[
+  { "id": 1, "nombre": "Stafford", "status": "A" },
+  { "id": 2, "nombre": "Chelsie", "status": "A" },
+  { "id": 3, "nombre": "West", "status": "A" },
+  { "id": 4, "nombre": "Marlyn", "status": "C" },
+  { "id": 5, "nombre": "Phaidra", "status": "C" },
+  { "id": 6, "nombre": "Otha", "status": "A" },
+  { "id": 7, "nombre": "Joan", "status": "B" },
+  { "id": 8, "nombre": "Kin", "status": "C" },
+  { "id": 9, "nombre": "Gerome", "status": "A" },
+  { "id": 10, "nombre": "Alina", "status": "B" }
+]
